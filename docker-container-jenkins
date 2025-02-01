@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('pull code form git hub') {
+            steps {
+               git branch: 'main', url: 'https://github.com/singhnirbhai/pipeline-httpd.git'
+            }
+        }
+    stage('build docker image form build file'){
+        steps {
+            sh 'docker image build -t website .'
+            sh 'docker image tag website nirbhaisingh/website'
+        }
+    }
+        stage('push dockerimage to docker hubb') {
+            steps {
+            sh 'docker login -u nirbhaisingh -p $dockerpassword' 
+            sh 'docker push nirbhaisingh/website'
+        }    
+    }
+        stage( 'Deployment' ) {
+            steps{
+            sh  'docker container rm -f website'
+            sh  'docker container run --name website -p 8000:80 -d nirbhaisingh/website'
+       }
+     }
+   }
+}
