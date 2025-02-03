@@ -1,0 +1,12 @@
+For getting ssh jenkins to master
+sudo ssh -o StrictHostKeyChecking=no -i passwd.pem root@13.201.26.32 
+
+code pipeline of creatig apply kubernetes file with jenkins!!!!
+
+sudo docker build -t docker.io/nirbhaisingh/jenkins .
+sudo docker login -u nirbhaisingh -p $dockerpassword
+sudo docker push docker.io/nirbhaisingh/<name of image>
+sudo docker rmi docker.io/nirbhaisingh/<name of image>
+sudo ssh -o StrictHostKeyChecking=no -i passwd.pem root@<>  git clone https://github.com/singhnirbhai/<name of the repo>
+sudo ssh -o StrictHostKeyChecking=no -i passwd.pem root@<>  kubectl create -f service.yaml  
+sudo ssh -o StrictHostKeyChecking=no -i passwd.pem root@<>  kubectl create -f Deployment.yaml   
